@@ -9,7 +9,7 @@ const AuthChoice = () => {
             <Link to="/signin" className="w-full">
                 <button 
                     className={`border w-full p-3 rounded-tl-md 
-                            ${location.pathname === '/signin' ? "bg-gray-200 hover:bg-gray-200" : "hover:bg-gray-50"}
+                            ${location.pathname === '/signin' ? "bg-gray-200 hover:bg-gray-300" : "hover:bg-gray-100"}
                             focus:outline-none`}>
                     Sign In
                 </button>
@@ -17,7 +17,7 @@ const AuthChoice = () => {
             <Link to="/signup" className="w-full">
                 <button 
                     className={`border w-full p-3 rounded-tr-md 
-                            ${ location.pathname === '/signup' ? "bg-gray-200 hover:bg-gray-200" : "hover:bg-gray-50" }
+                            ${ location.pathname === '/signup' ? "bg-gray-200 hover:bg-gray-300" : "hover:bg-gray-100" }
                             focus:outline-none`}>
                     Sign Up
                 </button>

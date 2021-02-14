@@ -1,0 +1,31 @@
+.auth-form-container {
+    @apply max-w-xs sm:max-w-md mx-auto mt-8;
+}
+
+.auth-form {
+    @apply rounded-b-md p-3 border;
+}
+
+.auth-form-error {
+    @apply p-2 rounded-md text-center mb-3;
+    @apply bg-red-100 text-red-900;
+}
+
+.auth-form-control {
+    @apply mb-5 w-full;
+}
+
+.auth-form-label {
+    @apply pl-1;
+}
+
+.auth-form-input {
+    @apply p-2 mt-1 w-full border rounded;
+    @apply focus:outline-none focus:border-gray-400;
+}
+
+.auth-form-button {
+    @apply w-full p-2 border font-medium rounded-md;
+    @apply bg-black text-white;
+    @apply hover:bg-gray-700;
+}

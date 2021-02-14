@@ -1,37 +1,41 @@
 import React from 'react'
 import AuthChoice from './AuthChoice'
+import signinIllustration from '../assets/images/signin.png';
+import '../styles/authForms.css';
 
-const Signup = () => {
+const Signin = () => {
     return (
-        <div className="max-w-xs sm:max-w-md mx-auto mt-8">
+        <div className="auth-form-container">
             <AuthChoice />
 
-            <form className="rounded-b-md p-3 border">
-                <div className="mb-5 w-full">
-                    <label className="pl-1" htmlFor="id_username">Enter Your Username</label>
+            <form className="auth-form">
+                <div className="auth-form-control">
+                    <label className="auth-form-label" htmlFor="id_username">Enter Your Username</label>
                     <input 
-                        className="p-2 mt-1 w-full border rounded" 
+                        className="auth-form-input" 
                         type="text" name="username" id="id_username" 
                         placeholder="Username" required />
                 </div>
 
-                <div className="mb-5 w-full">
-                    <label className="pl-1" htmlFor="id_password">Enter Your Password</label>
+                <div className="auth-form-control">
+                    <label className="auth-label" htmlFor="id_password">Enter Your Password</label>
                     <input 
-                        className="p-2 mt-1 w-full border rounded" 
+                        className="auth-form-input" 
                         type="password" name="password" id="id_password" 
                         placeholder="Password" required />
                 </div>
 
                 <button 
-                    className="w-full p-2 border font-medium 
-                            bg-gradient-to-r from-gray-300 to-gray-200 rounded 
-                            hover:to-gray-400 hover:border-gray-300">
+                    className="auth-form-button">
                     Sign In Now
                 </button>
             </form>
+
+            <div className="">
+                <img src={signinIllustration} alt="Sign in illustration"/>
+            </div>
         </div>
     )
 }
 
-export default Signup;
+export default Signin;
