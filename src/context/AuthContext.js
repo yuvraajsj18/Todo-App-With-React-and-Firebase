@@ -24,9 +24,19 @@ export function AuthProvider(props) {
         return auth.createUserWithEmailAndPassword(email, password);
     }
 
+    const signin = (email, password) => {
+        return auth.signInWithEmailAndPassword(email, password);
+    }
+
+    const signout = () => {
+        return auth.signOut();
+    } 
+
     const value = {
         currentUser,
         signup,
+        signin,
+        signout,
     }
 
     return (

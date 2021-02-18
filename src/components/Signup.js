@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useHistory, Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import AuthChoice from './AuthChoice'
 import todo_illustration from '../assets/images/todo.png'
@@ -12,7 +12,7 @@ const Signup = () => {
     const [error, setError] = useState("");
 
     const history = useHistory();
-    const {currentUser, signup } = useAuth();
+    const { signup } = useAuth();
     const [loading, setLoading] = useState(false);
 
     const handleSignUp = async (e) => {
@@ -25,15 +25,20 @@ const Signup = () => {
             return;
         }
 
+        // if (password.current.value.length < 6) {
+        //     setError("Password should be atleast 6 characters long.");
+        //     return;
+        // }
+
         try {
             setLoading(true);
             await signup(email.current.value, password.current.value);
             history.push('/');
-        } catch {
-            setError("Oops! Failed to sign up, please try again.")
+        } catch (error) {
+            setLoading(false);
+            setError(error.message);
         }
 
-        setLoading(false);
     };
 
     return (
@@ -53,8 +58,8 @@ const Signup = () => {
                     <input 
                         ref={email}
                         className="auth-form-input" 
-                        type="text" name="email" id="id_email" 
-                        placeholder="email" required />
+                        type="email" name="email" id="id_email" 
+                        placeholder="Email" required />
                 </div>
 
                 <div className="auth-form-control">
