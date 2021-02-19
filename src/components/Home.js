@@ -5,13 +5,7 @@ const Home = () => {
     const { currentUser } = useAuth();
 
     useEffect(() => {
-        const setName = async () => {
-            await currentUser.updateProfile({
-                displayName: "Username"
-            });
-        }
-
-        setName();
+        console.log(currentUser);
     }); 
 
     return (

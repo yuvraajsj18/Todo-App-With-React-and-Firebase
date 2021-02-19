@@ -25,10 +25,10 @@ const Signup = () => {
             return;
         }
 
-        // if (password.current.value.length < 6) {
-        //     setError("Password should be atleast 6 characters long.");
-        //     return;
-        // }
+        if (password.current.value.length < 6) {
+            setError("Password should be atleast 6 characters long.");
+            return;
+        }
 
         try {
             setLoading(true);
