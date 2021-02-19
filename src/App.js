@@ -1,12 +1,11 @@
 import './App.css';
 import Nav from './components/Nav';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
-import Home from './components/Home';
+import Todo from './components/Todo';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/routes/PrivateRoute';
-import UnauthorizedRoute from './components/routes/UnauthorizedRoute'
  
 function App() {
   return (
@@ -16,14 +15,14 @@ function App() {
             <Nav />
             <Switch>
               <PrivateRoute path="/" exact>
-                <Home />
+                <Todo />
               </PrivateRoute>
-              <UnauthorizedRoute path="/signup">
+              <Route path="/signup">
                 <Signup />
-              </UnauthorizedRoute>
-              <UnauthorizedRoute path="/signin">
+              </Route>
+              <Route path="/signin">
                 <Signin />
-              </UnauthorizedRoute>
+              </Route>
             </Switch>
           </AuthProvider>
         </Router>

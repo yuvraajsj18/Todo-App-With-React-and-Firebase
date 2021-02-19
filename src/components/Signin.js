@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import AuthChoice from './AuthChoice'
+import { ImSpinner2 } from 'react-icons/im'
 import signinIllustration from '../assets/images/signin.png';
 import '../styles/authForms.css';
 
@@ -11,8 +12,17 @@ const Signin = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const { signin } = useAuth();
+    const { isAuthenticated, signin } = useAuth();
     const history = useHistory();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            history.push('/');
+        }
+
+        document.title = "Todo App | Sign In";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -22,9 +32,9 @@ const Signin = () => {
             setLoading(true);
             await signin(email.current.value, password.current.value);
             history.push('/');
-        } catch {
+        } catch (error) {
             setLoading(false);
-            setError("Oops! Failed to sign in, please try again.");
+            setError(error.message);
         }
     };
 
@@ -62,6 +72,13 @@ const Signin = () => {
                     className="auth-form-button">
                     Sign In Now
                 </button>
+
+                {   loading &&
+                    <div className="auth-form-loading">
+                        <span>Signing you in</span>
+                        <ImSpinner2 className="auth-form-loading-svg" />
+                    </div>
+                }
             </form>
 
             <div className="">

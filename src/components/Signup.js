@@ -1,19 +1,30 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import AuthChoice from './AuthChoice'
+import { ImSpinner2 } from 'react-icons/im'
 import todo_illustration from '../assets/images/todo.png'
 import '../styles/authForms.css';
 
 const Signup = () => {
+    const name = useRef();
     const email = useRef();
     const password = useRef();
     const confirmPassword = useRef();
     const [error, setError] = useState("");
 
     const history = useHistory();
-    const { signup } = useAuth();
+    const { isAuthenticated, signup } = useAuth();
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            history.push('/');
+        }
+
+        document.title = "Todo App | Sign Up";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -32,7 +43,7 @@ const Signup = () => {
 
         try {
             setLoading(true);
-            await signup(email.current.value, password.current.value);
+            await signup(email.current.value, password.current.value, name.current.value);
             history.push('/');
         } catch (error) {
             setLoading(false);
@@ -52,6 +63,15 @@ const Signup = () => {
                         {error}
                     </div>
                 }
+
+                <div className="auth-form-control">
+                    <label className="auth-form-label" htmlFor="id_name">Enter Your Name</label>
+                    <input 
+                        ref={name}
+                        className="auth-form-input" 
+                        type="text" name="name" id="id_name" 
+                        placeholder="Name" required />
+                </div>
 
                 <div className="auth-form-control">
                     <label className="auth-form-label" htmlFor="id_email">Enter Your Email</label>
@@ -85,6 +105,13 @@ const Signup = () => {
                     className="auth-form-button">
                     Create Your Account
                 </button>
+                
+                {   loading &&
+                    <div className="auth-form-loading">
+                        <span>Signing you in</span>
+                        <ImSpinner2 className="auth-form-loading-svg" />
+                    </div>
+                }
             </form>
 
             <div className="">

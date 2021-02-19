@@ -29,3 +29,11 @@
     @apply bg-black text-white;
     @apply hover:bg-gray-700;
 }
+
+.auth-form-loading {
+    @apply mt-3 flex justify-end;
+}
+
+.auth-form-loading-svg {
+    @apply text-2xl ml-1 animate-spin;
+}

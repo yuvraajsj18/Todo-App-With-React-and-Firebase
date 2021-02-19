@@ -10,18 +10,28 @@ export const useAuth = () => {
 export function AuthProvider(props) {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
         const unsubsribe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
+            setIsAuthenticated(Boolean(currentUser));
             setLoading(false);
         });
 
-        return unsubsribe;
-    }, []);
+        return () => {
+            unsubsribe();
+            setIsAuthenticated(Boolean(currentUser));
+        }
+    });
 
-    const signup = (email, password) => {
-        return auth.createUserWithEmailAndPassword(email, password);
+    const signup = async (email, password, displayName) => {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        if (userCredential != null) {
+            return userCredential.user.updateProfile({
+                displayName,
+            });
+        }
     }
 
     const signin = (email, password) => {
@@ -37,6 +47,7 @@ export function AuthProvider(props) {
         signup,
         signin,
         signout,
+        isAuthenticated,
     }
 
     return (
