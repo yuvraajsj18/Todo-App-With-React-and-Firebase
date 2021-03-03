@@ -21,8 +21,7 @@ const Signin = () => {
         }
 
         document.title = "Todo App | Sign In";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    });
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -41,7 +40,7 @@ const Signin = () => {
     return (
         <div className="auth-form-container">
             <AuthChoice />
-
+            
             <form className="auth-form" onSubmit={handleSignIn}>
                 {
                     error &&

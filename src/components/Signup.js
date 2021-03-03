@@ -23,8 +23,7 @@ const Signup = () => {
         }
 
         document.title = "Todo App | Sign Up";
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    });
 
     const handleSignUp = async (e) => {
         e.preventDefault();

@@ -9,7 +9,7 @@ module.exports = {
         'light-blue': colors.lightBlue,
         'blue-gray': colors.blueGray,
         rose: colors.rose,
-      }
+      },
     },
   },
   variants: {
