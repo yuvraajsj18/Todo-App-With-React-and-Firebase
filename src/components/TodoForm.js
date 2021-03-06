@@ -8,7 +8,7 @@ const TodoForm = (props) => {
         e.preventDefault();
 
         setError("");
-        if (task.current.value.length() < 0) {
+        if (task.current.value.length <= 0) {
           setError("Please enter a task!");
           return;
         }
