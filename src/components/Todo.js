@@ -8,6 +8,7 @@ const Todo = () => {
     const [todos, setTodos] = useState([]);
     const { currentUser } = useAuth();
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         document.title = "Todo App";
@@ -17,6 +18,7 @@ const Todo = () => {
             try {
                 const todosFromServer = await fetchTodos(currentUser.uid);
                 setTodos(todosFromServer);
+                setLoading(false);
             } catch (e) {
                 setError("Oops! an error occured, please try again.");
                 console.error(e.message);
@@ -83,13 +85,16 @@ const Todo = () => {
     return (
         <main>
             <TodoForm onAdd={addTodo}/>
-
+            
             {
                 error &&
                 <div className="sm:max-w-md max-w-xs mx-auto my-6 flex justify-center bg-red-100 text-red-900 hover:shadow-md p-3 mb-4 border shadow rounded-md">{error}</div>
             }
 
-            <TodoList todos={todos} onComplete={setTodoIsCompleted} onDelete={deleteTodo}/>
+            {
+                !loading &&
+                <TodoList todos={todos} onComplete={setTodoIsCompleted} onDelete={deleteTodo}/>
+            }
         </main>
     )
 }
