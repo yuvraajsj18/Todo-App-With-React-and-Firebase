@@ -14,6 +14,7 @@ const TodoForm = (props) => {
         }
 
         props.onAdd(task.current.value);
+        task.current.value = "";
     };
 
     return (
