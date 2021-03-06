@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { auth } from '../firebase';
+import { auth, googleAuthProvider } from '../firebase';
 
 const AuthContext = React.createContext();
 
@@ -38,6 +38,10 @@ export function AuthProvider(props) {
         return auth.signInWithEmailAndPassword(email, password);
     }
 
+    const signInWithGoogle = () => {
+        return auth.signInWithPopup(googleAuthProvider);
+    }
+
     const signout = () => {
         return auth.signOut();
     } 
@@ -46,6 +50,7 @@ export function AuthProvider(props) {
         currentUser,
         signup,
         signin,
+        signInWithGoogle,
         signout,
         isAuthenticated,
     }

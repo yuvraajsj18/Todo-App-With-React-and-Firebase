@@ -5,6 +5,7 @@ import AuthChoice from './AuthChoice'
 import { ImSpinner2 } from 'react-icons/im'
 import signinIllustration from '../assets/images/signin.png';
 import '../styles/authForms.css';
+import GoogleSignInButton from 'react-google-button';
 
 const Signin = () => {
     const email = useRef();
@@ -12,7 +13,7 @@ const Signin = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const { isAuthenticated, signin } = useAuth();
+    const { isAuthenticated, signin, signInWithGoogle } = useAuth();
     const history = useHistory();
 
     useEffect(() => {
@@ -37,8 +38,27 @@ const Signin = () => {
         }
     };
 
+    const handleGoogleSignIn = async (e) => {
+        setError("");
+
+        try {
+            setLoading(true);
+            await signInWithGoogle();
+            history.push('/');
+        } catch (error) {
+            setLoading(false);
+            setError(error.message);
+        }
+    };
+
     return (
         <div className="auth-form-container">
+            <GoogleSignInButton type="light"
+                className="my-4 mx-auto"
+                onClick={handleGoogleSignIn}
+                disabled={loading}
+            />
+            
             <AuthChoice />
             
             <form className="auth-form" onSubmit={handleSignIn}>
